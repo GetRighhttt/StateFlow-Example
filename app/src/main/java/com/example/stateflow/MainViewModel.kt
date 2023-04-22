@@ -24,20 +24,23 @@ class MainViewModel : ViewModel() {
         _loginState.value = LoginState.Loading
         delay(3000L)
         if (username == "username" && password == "password") {
-            _loginState.value = LoginState.Success
+            _loginState.value =
+                LoginState.Success(successMessage = "Success! You have successfully logged in.")
         } else {
             _loginState.value =
                 LoginState.Failure(errorMessage = "Login attempt failed. Please try again.")
         }
     }
 
-    fun setEmptyState() = _loginState.value == LoginState.Empty
+    fun setEmptyState() {
+        _loginState.value = LoginState.Empty
+    }
 
     // Sealed class to handle state of Login.
     sealed class LoginState {
         object Empty : LoginState()
         object Idle : LoginState()
-        object Success : LoginState()
+        data class Success(val successMessage: String) : LoginState()
         data class Failure(val errorMessage: String) : LoginState()
         object Loading : LoginState()
     }

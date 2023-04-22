@@ -4,6 +4,7 @@ import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.stateflow.databinding.ActivityMainBinding
 import androidx.lifecycle.*
@@ -27,8 +28,12 @@ class MainActivity : AppCompatActivity() {
             }
             btnClear.setOnClickListener {
                 clearScreen().also {
-                    Snackbar.make(binding.root, "Cleared Screen", Snackbar.LENGTH_SHORT)
-                        .setAction("OK"){_ -> Unit } .show()
+                    Snackbar.make(
+                        binding.root,
+                        "Cleared Screen, setting Empty State.",
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .setAction("OK") { _ -> Unit }.show()
                 }
             }
         }
@@ -49,13 +54,9 @@ class MainActivity : AppCompatActivity() {
             viewModel.loginState.collect {
                 when (it) {
                     is MainViewModel.LoginState.Success -> {
-                        Snackbar.make(binding.root, "Success!!!", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, it.successMessage, Snackbar.LENGTH_SHORT).show()
                         binding.apply {
                             progressBar.visibility = View.GONE
-                            textInputLayoutLogin.boxBackgroundColor = getColor(R.color.white)
-                            textInputLayoutPassword.boxBackgroundColor = getColor(R.color.white)
-                            textInputLayoutPassword.helperText = getColor(R.color.white).toString()
-                            textInputLayoutPassword.helperText = getColor(R.color.white).toString()
                         }
                     }
 
@@ -74,7 +75,6 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     is MainViewModel.LoginState.Empty -> {
-                        Unit
                     }
                 }
             }
