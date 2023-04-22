@@ -3,6 +3,7 @@ package com.example.stateflow
 import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 etLogin.text.toString(),
                 etPassword.text.toString()
             )
+            Log.d("MAIN", "Login: $etLogin, $etPassword")
         }
     }
 
@@ -58,23 +60,28 @@ class MainActivity : AppCompatActivity() {
                         binding.apply {
                             progressBar.visibility = View.GONE
                         }
+                        Log.d("MAIN", "Login successful.")
                     }
 
                     is MainViewModel.LoginState.Failure -> {
                         Snackbar.make(binding.root, it.errorMessage, Snackbar.LENGTH_SHORT).show()
                         binding.progressBar.visibility = View.GONE
+                        Log.d("MAIN", "Login failed.")
                     }
 
                     is MainViewModel.LoginState.Loading -> {
                         Snackbar.make(binding.root, "Loading State", Snackbar.LENGTH_SHORT).show()
                         binding.progressBar.visibility = View.VISIBLE
+                        Log.d("MAIN", "Loading...")
                     }
 
                     is MainViewModel.LoginState.Idle -> {
                         binding.progressBar.visibility = View.GONE
+                        Log.d("MAIN", "Currently idle...")
                     }
 
                     is MainViewModel.LoginState.Empty -> {
+                        Log.d("MAIN", "Currently empty...")
                     }
                 }
             }
@@ -87,6 +94,7 @@ class MainActivity : AppCompatActivity() {
             etLogin.text?.clear()
             etPassword.text?.clear()
         }
+        Log.d("MAIN", "Screen cleared!")
     }
 
     override fun onDestroy() {

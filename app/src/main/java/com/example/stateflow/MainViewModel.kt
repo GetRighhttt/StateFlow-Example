@@ -17,6 +17,7 @@ class MainViewModel : ViewModel() {
 
         // sets an idle state for the login variable to wait for the text
         _loginState.value = LoginState.Idle
+        Log.d("VIEW_MODEL", "Login state is IDLE...")
     }
 
     fun login(username: String, password: String) = viewModelScope.launch {
@@ -32,8 +33,10 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    // sets empty state in cleared method in main.
     fun setEmptyState() {
         _loginState.value = LoginState.Empty
+        Log.d("VIEW_MODEL", "Login state is EMPTY...")
     }
 
     // Sealed class to handle state of Login.
