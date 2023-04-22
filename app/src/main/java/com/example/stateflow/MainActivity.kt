@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
             // login button
             btnLogin.setOnClickListener {
                 setViewModelLoginMethod()
-                // add rotation animation to FAB
-                btnLogin.animate().rotationY(180F).duration = 500L
             }
 
             // clear button
@@ -43,8 +41,6 @@ class MainActivity : AppCompatActivity() {
                     )
                         .setAction("OK") { _ -> Unit }.show()
                 }
-                // add rotation animation to FAB
-                btnClear.animate().rotationY(180F).duration = 500L
             }
         }
 
@@ -59,6 +55,8 @@ class MainActivity : AppCompatActivity() {
                 etPassword.text.toString()
             )
             Log.d("MAIN", "Login: $etLogin, $etPassword")
+            // add rotation animation to FAB
+            btnLogin.animate().rotationY(180F).duration = 500L
         }
     }
 
@@ -104,6 +102,8 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             etLogin.text?.clear()
             etPassword.text?.clear()
+            // add rotation animation to FAB
+            btnClear.animate().rotationY(180F).duration = 500L
         }
         Log.d("MAIN", "Screen cleared!")
     }
