@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import com.example.stateflow.databinding.ActivityMainBinding
 import androidx.lifecycle.*
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,9 +25,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.apply {
 
+            // login button
             btnLogin.setOnClickListener {
                 setViewModelLoginMethod()
             }
+
+            // clear button
             btnClear.setOnClickListener {
                 clearScreen().also {
                     Snackbar.make(
@@ -38,6 +42,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // sets the login state
         determineLoginState()
     }
 
@@ -52,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun determineLoginState() {
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launch {
             viewModel.loginState.collect {
                 when (it) {
                     is MainViewModel.LoginState.Success -> {
