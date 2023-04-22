@@ -25,8 +25,8 @@
             android:id="@+id/et_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/login"
             android:drawableStart="@drawable/baseline_person_24"
+            android:hint="@string/login"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -47,33 +47,62 @@
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
             android:drawableStart="@drawable/baseline_lock_24"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:elevation="40dp"
-        android:shadowColor="@color/black"
-        android:text="@string/login"
+        android:contentDescription="@string/login"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_clear"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/login"
+            android:elevation="40dp"
+            android:shadowColor="@color/black"
+            android:src="@drawable/baseline_add_24"
+            android:tint="#BD2323"
+            app:backgroundTint="@android:color/holo_green_light"
+            app:fabSize="normal"
+            app:rippleColor="@color/design_default_color_secondary"
+            app:useCompatPadding="true" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:elevation="40dp"
-        android:shadowColor="@color/black"
-        android:text="@string/clear"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutLogin"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword">
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/clear"
+            android:elevation="40dp"
+            android:shadowColor="@color/black"
+            android:src="@drawable/baseline_indeterminate_check_box_24"
+            android:text="@string/clear"
+            app:backgroundTint="?attr/colorError"
+            app:fabSize="normal"
+            app:rippleColor="#0A1137"
+            app:useCompatPadding="true" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.ViewCompat.animate
 import com.example.stateflow.databinding.ActivityMainBinding
 import androidx.lifecycle.*
 import com.google.android.material.snackbar.Snackbar
@@ -28,6 +29,8 @@ class MainActivity : AppCompatActivity() {
             // login button
             btnLogin.setOnClickListener {
                 setViewModelLoginMethod()
+                // add rotation animation to FAB
+                btnLogin.animate().rotationY(180F).duration = 500L
             }
 
             // clear button
@@ -40,6 +43,8 @@ class MainActivity : AppCompatActivity() {
                     )
                         .setAction("OK") { _ -> Unit }.show()
                 }
+                // add rotation animation to FAB
+                btnClear.animate().rotationY(180F).duration = 500L
             }
         }
 
