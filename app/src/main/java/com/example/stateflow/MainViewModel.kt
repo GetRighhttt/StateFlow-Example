@@ -12,12 +12,16 @@ class MainViewModel : ViewModel() {
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Empty)
     val loginState: StateFlow<LoginState> = _loginState
 
+    companion object {
+        const val TAG = "VIEW_MODEL"
+    }
+
     init {
-        Log.d("VIEW_MODEL", "MainViewModel Initialized.")
+        Log.d(TAG, "MainViewModel Initialized.")
 
         // sets an idle state for the login variable to wait for the text
         _loginState.value = LoginState.Idle
-        Log.d("VIEW_MODEL", "Login state is IDLE...")
+        Log.d(TAG, "Login state is IDLE...")
     }
 
     fun login(username: String, password: String) {
@@ -42,14 +46,14 @@ class MainViewModel : ViewModel() {
                 }
             }
         } catch (e: Exception) {
-            Log.d("VIEW_MODEL", "Error when launching viewModelScope: $e")
+            Log.d(TAG, "Error when launching viewModelScope: $e")
         }
     }
 
     // sets empty state in cleared method in main.
     fun setEmptyState() {
         _loginState.value = LoginState.Empty
-        Log.d("VIEW_MODEL", "Login state is EMPTY...")
+        Log.d(TAG, "Login state is EMPTY...")
     }
 
     // Sealed class to handle state of Login.

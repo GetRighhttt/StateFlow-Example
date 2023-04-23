@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by viewModels()
 
+    companion object {
+        const val TAG = "MAIN"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 etLogin.text.toString(),
                 etPassword.text.toString()
             )
-            Log.d("MAIN", "Login: $etLogin, $etPassword")
+            Log.d(TAG, "Login: $etLogin, $etPassword")
         }
     }
 
@@ -60,35 +64,35 @@ class MainActivity : AppCompatActivity() {
                             binding.apply {
                                 progressBar.visibility = View.GONE
                             }
-                            Log.d("MAIN", "Login successful.")
+                            Log.d(TAG, "Login successful.")
                         }
 
                         is MainViewModel.LoginState.Failure -> {
                             materialDialog(it.errorMessage)
                             binding.progressBar.visibility = View.GONE
-                            Log.d("MAIN", "Login failed.")
+                            Log.d(TAG, "Login failed.")
                         }
 
                         is MainViewModel.LoginState.Loading -> {
                             Snackbar.make(binding.root, "Loading State", Snackbar.LENGTH_SHORT)
                                 .show()
                             binding.progressBar.visibility = View.VISIBLE
-                            Log.d("MAIN", "Loading...")
+                            Log.d(TAG, "Loading...")
                         }
 
                         is MainViewModel.LoginState.Idle -> {
                             binding.progressBar.visibility = View.GONE
-                            Log.d("MAIN", "Currently idle...")
+                            Log.d(TAG, "Currently idle...")
                         }
 
                         is MainViewModel.LoginState.Empty -> {
-                            Log.d("MAIN", "Currently empty...")
+                            Log.d(TAG, "Currently empty...")
                         }
                     }
                 }
             }
         } catch (e: IllegalStateException) {
-            Log.d("MAIN", "IllegalStateException: ${e.message}")
+            Log.d(TAG, "IllegalStateException: ${e.message}")
         }
     }
 
@@ -99,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             etPassword.text?.clear()
             animateButton(btnClear)
         }
-        Log.d("MAIN", "Screen cleared!")
+        Log.d(TAG, "Screen cleared!")
     }
 
     private fun materialDialog(stateMessage: String): MaterialAlertDialogBuilder =
