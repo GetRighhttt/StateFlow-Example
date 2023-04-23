@@ -1,17 +1,14 @@
 package com.example.stateflow
 
-import android.app.Dialog
-import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.view.ViewCompat.animate
 import com.example.stateflow.databinding.ActivityMainBinding
 import androidx.lifecycle.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -50,8 +47,6 @@ class MainActivity : AppCompatActivity() {
                 etPassword.text.toString()
             )
             Log.d("MAIN", "Login: $etLogin, $etPassword")
-            // add rotation animation to FAB
-            btnLogin.animate().rotationY(180F).duration = 500L
         }
     }
 
@@ -102,8 +97,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             etLogin.text?.clear()
             etPassword.text?.clear()
-            // add rotation animation to FAB
-            btnClear.animate().rotationY(180F).duration = 500L
+            animateButton(btnClear)
         }
         Log.d("MAIN", "Screen cleared!")
     }
@@ -115,10 +109,23 @@ class MainActivity : AppCompatActivity() {
                 .setMessage(stateMessage)
                 .setPositiveButton("OK") { dialog, _ ->
                     clearScreen()
+                    animateButton(binding.btnLogin)
                     dialog.dismiss()
                 }
                 .show()
         }
+
+    private fun animateButton(button: FloatingActionButton) = binding.apply {
+        button.animate().apply {
+            duration = 350L
+            rotationYBy(180F)
+        }.withEndAction {
+            button.animate().apply {
+                duration = 350L
+                rotationYBy(-180F)
+            }
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
