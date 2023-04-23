@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/login_stateflow_example"
+        android:textSize="30sp"
+        android:textColor="#900505"
+        style="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutLogin"
         style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
