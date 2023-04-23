@@ -7,16 +7,16 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/login_stateflow_example"
-        android:textSize="30sp"
         android:textColor="#900505"
-        style="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutLogin"

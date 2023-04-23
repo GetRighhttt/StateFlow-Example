@@ -108,14 +108,15 @@ class MainActivity : AppCompatActivity() {
         Log.d("MAIN", "Screen cleared!")
     }
 
-    private fun materialDialog(stateMessage: String) : MaterialAlertDialogBuilder =
+    private fun materialDialog(stateMessage: String): MaterialAlertDialogBuilder =
         object : MaterialAlertDialogBuilder(this) {
             val dialog = MaterialAlertDialogBuilder(this@MainActivity)
                 .setTitle("Login Dialog")
                 .setMessage(stateMessage)
                 .setPositiveButton("OK") { dialog, _ ->
                     clearScreen()
-                    dialog.dismiss() }
+                    dialog.dismiss()
+                }
                 .show()
         }
 
