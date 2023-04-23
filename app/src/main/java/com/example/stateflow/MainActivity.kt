@@ -1,5 +1,6 @@
 package com.example.stateflow
 
+import android.app.Dialog
 import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.core.view.ViewCompat.animate
 import com.example.stateflow.databinding.ActivityMainBinding
 import androidx.lifecycle.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -66,8 +68,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.loginState.collect {
                     when (it) {
                         is MainViewModel.LoginState.Success -> {
-                            Snackbar.make(binding.root, it.successMessage, Snackbar.LENGTH_SHORT)
-                                .show()
+                            materialDialog(it.successMessage)
                             binding.apply {
                                 progressBar.visibility = View.GONE
                             }
@@ -75,8 +76,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         is MainViewModel.LoginState.Failure -> {
-                            Snackbar.make(binding.root, it.errorMessage, Snackbar.LENGTH_SHORT)
-                                .show()
+                            materialDialog(it.errorMessage)
                             binding.progressBar.visibility = View.GONE
                             Log.d("MAIN", "Login failed.")
                         }
@@ -114,6 +114,15 @@ class MainActivity : AppCompatActivity() {
         }
         Log.d("MAIN", "Screen cleared!")
     }
+
+    private fun materialDialog(stateMessage: String) : MaterialAlertDialogBuilder =
+        object : MaterialAlertDialogBuilder(this) {
+            val dialog = MaterialAlertDialogBuilder(this@MainActivity)
+                .setTitle("Login Dialog")
+                .setMessage(stateMessage)
+                .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                .show()
+        }
 
     override fun onDestroy() {
         super.onDestroy()
