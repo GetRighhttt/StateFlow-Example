@@ -22,11 +22,18 @@ class MainViewModel : ViewModel() {
 
     fun login(username: String, password: String) {
 
+        /*
+        Using our Login data class for our username and password values.
+        Kotlin destructing syntax allows us to do this without creating an object
+        of that class.
+         */
+        val (name, pass) = Login(username, password)
+
         try {
             viewModelScope.launch {
                 _loginState.value = LoginState.Loading
                 delay(3000L)
-                if (username == "username" && password == "password") {
+                if (name == "username" && pass == "password") {
                     _loginState.value =
                         LoginState.Success(successMessage = "Success! You have successfully logged in.")
                 } else {
