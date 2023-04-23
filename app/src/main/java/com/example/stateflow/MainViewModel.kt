@@ -20,16 +20,22 @@ class MainViewModel : ViewModel() {
         Log.d("VIEW_MODEL", "Login state is IDLE...")
     }
 
-    fun login(username: String, password: String) = viewModelScope.launch {
+    fun login(username: String, password: String) {
 
-        _loginState.value = LoginState.Loading
-        delay(3000L)
-        if (username == "username" && password == "password") {
-            _loginState.value =
-                LoginState.Success(successMessage = "Success! You have successfully logged in.")
-        } else {
-            _loginState.value =
-                LoginState.Failure(errorMessage = "Login attempt failed. Please try again.")
+        try {
+            viewModelScope.launch {
+                _loginState.value = LoginState.Loading
+                delay(3000L)
+                if (username == "username" && password == "password") {
+                    _loginState.value =
+                        LoginState.Success(successMessage = "Success! You have successfully logged in.")
+                } else {
+                    _loginState.value =
+                        LoginState.Failure(errorMessage = "Login attempt failed. Please try again.")
+                }
+            }
+        } catch (e: Exception) {
+            Log.d("VIEW_MODEL", "Error when launching viewModelScope: $e")
         }
     }
 
