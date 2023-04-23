@@ -35,14 +35,7 @@ class MainActivity : AppCompatActivity() {
 
             // clear button
             btnClear.setOnClickListener {
-                clearScreen().also {
-                    Snackbar.make(
-                        binding.root,
-                        "Cleared Screen, setting Empty State.",
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .setAction("OK") { _ -> Unit }.show()
-                }
+                materialDialog("Are you sure you want to clear all the data?")
             }
         }
 
@@ -120,7 +113,9 @@ class MainActivity : AppCompatActivity() {
             val dialog = MaterialAlertDialogBuilder(this@MainActivity)
                 .setTitle("Login Dialog")
                 .setMessage(stateMessage)
-                .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton("OK") { dialog, _ ->
+                    clearScreen()
+                    dialog.dismiss() }
                 .show()
         }
 
