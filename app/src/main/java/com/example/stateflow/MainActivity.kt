@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun determineLoginState() {
         try {
             lifecycleScope.launch {
-                viewModel.loginState.collect {
+                viewModel.loginState.flowWithLifecycle(lifecycle).collect {
                     when (it) {
                         is MainViewModel.LoginState.Success -> {
                             materialDialog(it.successMessage)
