@@ -36,7 +36,7 @@ class MainViewModel : ViewModel() {
         try {
             viewModelScope.launch {
                 _loginState.value = LoginState.Loading
-                delay(3000L)
+                delay(1000L)
                 if (name == "username" && pass == "password") {
                     _loginState.value =
                         LoginState.Success(successMessage = "Success! You have successfully logged in.")
